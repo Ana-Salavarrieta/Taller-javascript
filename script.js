@@ -31,10 +31,14 @@
  const riego5= 6.960;
 
  // evento
+ console.log("AQUI");
+ 
     formsdatosGenerales.addEventListener("submit", function(event) {
 
+    
     //Capturar datos//
     nombreCompleto = document.getElementById("nombreCompleto").value;
+    console.log("nombreCompleto"+nombreCompleto);
     edad = document.getElementById("edad").value;
     tipodeDocumento = document.getElementById("tipodeDocumento").value; 
     numerodeDocumento = document.getElementById("numerodeDocumento").value;
