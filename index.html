@@ -150,9 +150,7 @@
 
             </div>
 
-            <button type="submit">
-                Calcular Nómina
-            </button>
+            <input type="submit" value="Calcular Nómina">
 
         </form>
 
@@ -160,14 +158,84 @@
         <!-- resultados -->
         <div id="resultados" class="oculto">
 
-            <h3>Resultados</h3>
+            <div class="resultado-grid">
 
-            <div id="contenidoResultados"></div>
 
-            <button
-                onclick="location.reload()">
-                Nuevo Cálculo
-            </button>
+                <!-- izquierda -->
+                <div class="resultado-info">
+
+                    <h3>Resultados</h3>
+
+                    <div id="contenidoResultados"></div>
+
+                    <button onclick="location.reload()">
+
+                        Nuevo Cálculo
+
+                    </button>
+
+                </div>
+
+
+                <!-- derecha -->
+                <div class="resultado-grafica">
+
+                    <div>
+
+                        <div class="circulo">
+
+                            <div class="circulo-centro">
+
+                                <span>
+                                    Ingreso neto
+                                </span>
+
+                                <strong id="totalCirculo">
+
+                                    $0
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- leyenda -->
+                        <div class="leyenda">
+
+                            <p>
+                                <span class="rojo"></span>
+                                Salud
+                            </p>
+
+                            <p>
+                                <span class="naranja"></span>
+                                Pensión
+                            </p>
+
+                            <p>
+                                <span class="verde"></span>
+                                ARL
+                            </p>
+
+                            <p>
+                                <span class="morado"></span>
+                                Retención
+                            </p>
+
+                            <p>
+                                <span class="azul"></span>
+                                Neto
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 

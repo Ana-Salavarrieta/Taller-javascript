@@ -60,7 +60,8 @@ body {
 /* contenedor */
 .container {
 
-    max-width: 500px;
+    max-width: 1100px;
+
     width: 100%;
 
     background: var(--card);
@@ -151,7 +152,8 @@ select:focus {
 
 
 /* botones */
-button {
+button,
+input[type="submit"] {
 
     background-color: var(--primary);
 
@@ -175,7 +177,8 @@ button {
 
 
 /* hover botones */
-button:hover {
+button:hover,
+input[type="submit"]:hover {
 
     background-color: var(--primary-hover);
 
@@ -185,13 +188,175 @@ button:hover {
 /* resultados */
 #resultados {
 
+    margin-top: 20px;
+
+}
+
+
+/* grid resultados */
+.resultado-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 30px;
+
+    align-items: center;
+
+}
+
+
+/* panel izquierdo */
+.resultado-info {
+
     background: #f0f9ff;
 
     border: 1px solid #bae6fd;
 
-    padding: 1.5rem;
+    padding: 25px;
 
     border-radius: 12px;
+
+}
+
+
+/* grafica */
+.resultado-grafica {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+/* circulo */
+.circulo {
+
+    width: 320px;
+
+    height: 320px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+/* centro blanco */
+.circulo-centro {
+
+    width: 190px;
+
+    height: 190px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+}
+
+
+/* texto centro */
+.circulo-centro span {
+
+    font-size: 16px;
+
+    color: #64748b;
+
+}
+
+.circulo-centro strong {
+
+    font-size: 28px;
+
+    color: #0f172a;
+
+    margin-top: 10px;
+
+}
+
+
+/* leyenda */
+.leyenda {
+
+    margin-top: 25px;
+
+}
+
+.leyenda p {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 8px 0;
+
+    font-size: 14px;
+
+}
+
+.leyenda span {
+
+    width: 15px;
+
+    height: 15px;
+
+    border-radius: 50%;
+
+    display: inline-block;
+
+}
+
+
+/* colores */
+.rojo {
+
+    background: #ef4444;
+
+}
+
+.naranja {
+
+    background: #f59e0b;
+
+}
+
+.verde {
+
+    background: #10b981;
+
+}
+
+.morado {
+
+    background: #8b5cf6;
+
+}
+
+.azul {
+
+    background: #2563eb;
 
 }
 
@@ -234,5 +399,17 @@ hr {
     border-top: 1px solid var(--border);
 
     margin: 20px 0;
+
+}
+
+
+/* responsive */
+@media (max-width: 900px) {
+
+    .resultado-grid {
+
+        grid-template-columns: 1fr;
+
+    }
 
 }
