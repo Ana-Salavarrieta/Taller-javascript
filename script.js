@@ -1,129 +1,429 @@
 //Datos de usuario//
-//  //punto1//
- let nombreCompleto = "";
- let edad = ""; 
- let tipodeDocumento = ""; 
- let numerodeDocumento = "";
+//punto1//
+let nombreCompleto = "";
+let edad = "";
+let tipoDocumento = "";
+let numeroDocumento = "";
 
- //punto3//
- let salario = "";
- let comisiones = "";
- let totalhorasExtra = ""; 
- let niveldeRiesgo= "";
 
- //formulario// 
- const formsdatosGenerales= document.getElementById("datosGenerales");
+//punto3//
+let salario = "";
+let comisiones = "";
+let totalhorasExtra = "";
+let niveldeRiesgo = "";
 
- //constantes//
- const salariominimolegalVigente = 1750905 ; 
- const salariominimointegralVigente = 22761765;
- const subsidiodeTrasporte = 249095; 
- const uvT = 52.37; 
- const psalud = 0.04; 
- const pension = 0.04;
- const fondodesolidaridadPensonal=0.01;
 
- //riesgos//
- const riego1= 0.522; 
- const riego2= 1.044; 
- const riego3= 2.436; 
- const riego4= 4.350; 
- const riego5= 6.960;
+//formulario//
+const formsdatosGenerales =
+document.getElementById("datosGenerales");
 
- // evento
- console.log("AQUI");
- 
-    formsdatosGenerales.addEventListener("submit", function(event) {
+const formularioSalario =
+document.getElementById("datos-Salariales");
 
-    
+
+//constantes//
+const salariominimolegalVigente = 1750905;
+
+const subsidiodeTrasporte = 249095;
+
+const uvT = 52.37;
+
+const psalud = 0.04;
+
+const pension = 0.04;
+
+const fondodesolidaridadPensonal = 0.01;
+
+
+// evento
+console.log("AQUI");
+
+
+//funcion validar usuario//
+function validarUsuario() {
+
+    if (edad < 18) {
+
+        alert("No se calcula porque es menor de edad");
+
+        return false;
+
+    } else if (edad >= 18 && edad <= 25) {
+
+        alert("No se calcula porque es beneficiario");
+
+        return false;
+
+    } else if (edad > 25 && edad <= 60) {
+
+        alert("Se calculan las cotizaciones");
+
+        return true;
+
+    } else if (edad > 60) {
+
+        alert("Se calcula pensión por ser mayor de 60 años");
+
+        return true;
+
+    }
+
+}
+
+
+
+//primer formulario//
+formsdatosGenerales.addEventListener("submit", function(event) {
+
+    //evita recargar//
+    event.preventDefault();
+
+
     //Capturar datos//
-    nombreCompleto = document.getElementById("nombreCompleto").value;
-    console.log("nombreCompleto"+nombreCompleto);
-    edad = document.getElementById("edad").value;
-    tipodeDocumento = document.getElementById("tipodeDocumento").value; 
-    numerodeDocumento = document.getElementById("numerodeDocumento").value;
-    salario = document.getElementById("salario").value;
-    comisiones = document.getElementById("comisiones").value;
-    totalhorasExtra = document.getElementById("totalhorasExtra").value; 
-    niveldeRiesgo = document.getElementById("niveldeRiesgo").value; 
-    console.log(nombreCompleto, edad, tipodeDocumento, numerodeDocumento, salario, comisiones, totalhorasExtra, niveldeRiesgo);
+    nombreCompleto =
+    document.getElementById("nombre").value;
+
+    edad =
+    Number(document.getElementById("edad").value);
+
+    tipoDocumento =
+    document.getElementById("tipoDocumento").value;
+
+    numeroDocumento =
+    document.getElementById("numeroDocumento").value;
 
 
-    
+    //Validacion//
+    if (
+
+        nombreCompleto === "" ||
+
+        edad === "" ||
+
+        tipoDocumento === "" ||
+
+        numeroDocumento === ""
+
+    ) {
+
+        alert("Por favor complete todos los campos");
+
+        return;
+
+    }
+
+
+    //validar edad//
+    if (!validarUsuario()) {
+
+        return;
+
+    }
+
+
+    //ocultar formulario datos generales//
+    formsdatosGenerales.classList.add("oculto");
+
+
+    //mostrar formulario salario//
+    formularioSalario.classList.remove("oculto");
+
+});
+
+
+
+//segundo formulario//
+formularioSalario.addEventListener("submit", function(event) {
+
+    //evita recargar//
+    event.preventDefault();
+
+
+    //Capturar datos//
+    salario =
+    Number(document.getElementById("salario").value);
+
+    comisiones =
+    Number(document.getElementById("comisiones").value);
+
+    totalhorasExtra =
+    Number(document.getElementById("horasExtra").value);
+
+    niveldeRiesgo =
+    Number(document.getElementById("riesgo").value);
+
+
     //punto4//
-   
-    let salarioTotal = salario + comisiones + totalhorasExtra;
 
-    let calculoIbc = salarioTotal * 0.7;
+    let salarioTotal =
+
+    salario +
+
+    comisiones +
+
+    totalhorasExtra;
+
+
+    let calculoIbc =
+
+    salarioTotal * 0.7;
+
 
     let auxilioTransporte = 0;
+
+
     if (salario <= (salariominimolegalVigente * 2)) {
-        auxilioTransporte = subsidiodeTrasporte;
+
+        auxilioTransporte =
+        subsidiodeTrasporte;
+
     }
 
-    let valorSalud = calculoIbc * psalud;
-    let valorPension = calculoIbc * pension;
+
+    let valorSalud =
+
+    calculoIbc * psalud;
+
+
+    let valorPension =
+
+    calculoIbc * pension;
+
 
     let fondoSolidaridad = 0;
+
+
     if (calculoIbc >= (salariominimolegalVigente * 4)) {
-        fondoSolidaridad = calculoIbc * fondodesolidaridadPensonal;
+
+        fondoSolidaridad =
+
+        calculoIbc *
+
+        fondodesolidaridadPensonal;
+
     }
 
-   // retencion//
 
-    let ingresoGravado = calculoIbc - (valorSalud + valorPension);
-    let ingresoUVT = ingresoGravado / uvT;
+
+    //retencion//
+
+    let ingresoGravado =
+
+    calculoIbc -
+
+    (valorSalud + valorPension);
+
+
+    let ingresoUVT =
+
+    ingresoGravado / uvT;
+
 
     let retencionUVT = 0;
 
+
     if (ingresoUVT <= 95) {
+
         retencionUVT = 0;
+
     } else if (ingresoUVT <= 150) {
-        retencionUVT = (ingresoUVT - 95) * 0.19;
+
+        retencionUVT =
+
+        (ingresoUVT - 95) * 0.19;
+
     } else if (ingresoUVT <= 360) {
-        retencionUVT = (ingresoUVT - 150) * 0.28 + 10;
+
+        retencionUVT =
+
+        (ingresoUVT - 150) * 0.28 + 10;
+
     } else if (ingresoUVT <= 640) {
-        retencionUVT = (ingresoUVT - 360) * 0.33 + 69;
+
+        retencionUVT =
+
+        (ingresoUVT - 360) * 0.33 + 69;
+
     } else if (ingresoUVT <= 945) {
-        retencionUVT = (ingresoUVT - 640) * 0.35 + 162;
+
+        retencionUVT =
+
+        (ingresoUVT - 640) * 0.35 + 162;
+
     } else if (ingresoUVT <= 2300) {
-        retencionUVT = (ingresoUVT - 945) * 0.37 + 268;
+
+        retencionUVT =
+
+        (ingresoUVT - 945) * 0.37 + 268;
+
     } else {
-        retencionUVT = (ingresoUVT - 2300) * 0.39 + 770;
+
+        retencionUVT =
+
+        (ingresoUVT - 2300) * 0.39 + 770;
+
     }
 
-    let retencion = retencionUVT * uvT;
 
-     // aporcentaje de riesgo//
+    let retencion =
 
-    let porcentajeRiesgo = 0;
+    retencionUVT * uvT;
 
-    switch (niveldeRiesgo) {
-        case 1: porcentajeRiesgo = riego1; break;
-        case 2: porcentajeRiesgo = riego2; break;
-        case 3: porcentajeRiesgo = riego3; break;
-        case 4: porcentajeRiesgo = riego4; break;
-        case 5: porcentajeRiesgo = riego5; break;
-        default:
-            alert("Riesgo inválido");
-            return;
-    }
-     let arl = calculoIbc * porcentajeRiesgo;
 
-     //Total//
-     let deducciones = valorSalud + valorPension + fondoSolidaridad + arl + retencion;
 
-     let total = salarioTotal + auxilioTransporte - deducciones;
-     //Resultados//
+    //aporcentaje de riesgo//
 
-     document.getElementById("contenidoResultados").innerHTML = `
-     <p><strong>Salario:</strong> $${salario.toLocaleString()}</p>
-     <p><strong>IBC:</strong> $${calculoIbc.toLocaleString()}</p>
-     <p><strong>Salud:</strong> $${valorSalud.toLocaleString()}</p>
-     <p><strong>Pensión:</strong> $${valorPension.toLocaleString()}</p>
-     <p><strong>ARL:</strong> $${arl.toLocaleString()}</p>
-     <p><strong>Retención en la fuente:</strong> $${retencion.toLocaleString()}</p>
-     <p><strong>Total final:</strong> $${total.toLocaleString()}</p>
-`;
+    let arl =
 
-    });
+    calculoIbc * niveldeRiesgo;
+
+
+
+    //Total//
+
+    let deducciones =
+
+    valorSalud +
+
+    valorPension +
+
+    fondoSolidaridad +
+
+    retencion +
+
+    arl;
+
+
+    let total =
+
+    salarioTotal +
+
+    auxilioTransporte -
+
+    deducciones;
+
+
+
+    //porcentajes//
+
+    let totalGrafica =
+
+    valorSalud +
+
+    valorPension +
+
+    arl +
+
+    retencion +
+
+    total;
+
+
+    let pSalud =
+
+    (valorSalud / totalGrafica) * 100;
+
+
+    let pPension =
+
+    (valorPension / totalGrafica) * 100;
+
+
+    let pArl =
+
+    (arl / totalGrafica) * 100;
+
+
+    let pRetencion =
+
+    (retencion / totalGrafica) * 100;
+
+
+    let pTotal =
+
+    (total / totalGrafica) * 100;
+
+
+
+    //crear grafica//
+
+    document.querySelector(".circulo").style.background = `
+
+    conic-gradient(
+
+    #ef4444 0% ${pSalud}%,
+
+    #f59e0b ${pSalud}% ${pSalud + pPension}%,
+
+    #10b981 ${pSalud + pPension}% ${pSalud + pPension + pArl}%,
+
+    #8b5cf6 ${pSalud + pPension + pArl}% ${pSalud + pPension + pArl + pRetencion}%,
+
+    #2563eb ${pSalud + pPension + pArl + pRetencion}% 100%
+
+    )
+
+    `;
+
+
+
+    //ocultar formulario salario//
+    formularioSalario.classList.add("oculto");
+
+
+    //mostrar resultados//
+    document
+    .getElementById("resultados")
+    .classList.remove("oculto");
+
+
+    //total centro grafica//
+    document.getElementById("totalCirculo").innerHTML =
+
+    `$${total.toLocaleString()}`;
+
+
+    //imprimir resultados//
+    document.getElementById("contenidoResultados").innerHTML = `
+
+    <p><strong>Empleado:</strong>
+    ${nombreCompleto}</p>
+
+    <p><strong>Edad:</strong>
+    ${edad}</p>
+
+    <p><strong>Documento:</strong>
+    ${tipoDocumento} ${numeroDocumento}</p>
+
+    <hr>
+
+    <p><strong>Salario:</strong>
+    $${salario.toLocaleString()}</p>
+
+    <p><strong>Comisiones:</strong>
+    $${comisiones.toLocaleString()}</p>
+
+    <p><strong>Horas Extra:</strong>
+    $${totalhorasExtra.toLocaleString()}</p>
+
+    <p><strong>IBC:</strong>
+    $${calculoIbc.toLocaleString()}</p>
+
+    <p><strong>Salud:</strong>
+    $${valorSalud.toLocaleString()}</p>
+
+    <p><strong>Pensión:</strong>
+    $${valorPension.toLocaleString()}</p>
+
+    <p><strong>ARL:</strong>
+    $${arl.toLocaleString()}</p>
+
+    <p><strong>Retención:</strong>
+    $${retencion.toLocaleString()}</p>
+
+    <p><strong>Total Final:</strong>
+    $${total.toLocaleString()}</p>
+
+    `;
+
+});
