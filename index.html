@@ -34,48 +34,46 @@
                 id="nombre"
                 placeholder="Nombre completo"
                 required
+                minlength="2"
+                maxlength="100"
+                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$"
+                title="Solo se permiten letras, números y espacios"
             >
 
             <input
-                type="number"
+                type="text"
                 id="edad"
                 placeholder="Edad"
                 required
+                pattern="^(1[89]|[2-9][0-9]|100)$"
+                title="Ingrese una edad válida entre 18 y 100 sin decimales"
             >
 
             <select id="tipoDocumento" required>
 
-                <option value="">
-                    Tipo de documento
-                </option>
+                <option value="">Tipo de documento</option>
 
-                <option value="CC">
-                    Cédula de ciudadanía
-                </option>
+                <option value="CC">Cédula de ciudadanía</option>
 
-                <option value="TI">
-                    Tarjeta de identidad
-                </option>
+                <option value="TI">Tarjeta de identidad</option>
 
-                <option value="CE">
-                    Cédula de extranjería
-                </option>
+                <option value="CE">Cédula de extranjería</option>
 
-                <option value="PP">
-                    Pasaporte
-                </option>
+                <option value="PP">Pasaporte</option>
 
-                <option value="RC">
-                    Registro civil
-                </option>
+                <option value="RC">Registro civil</option>
 
             </select>
 
             <input
-                type="number"
+                type="text"
                 id="numeroDocumento"
                 placeholder="Número de documento"
                 required
+                minlength="3"
+                maxlength="18"
+                pattern="[0-9]+"
+                title="El documento debe tener entre 3 y 18 números"
             >
 
             <input
@@ -102,6 +100,9 @@
                     id="salario"
                     placeholder="Salario básico (COP)"
                     required
+                    min="1750905"
+                    max="60000000"
+                    step="1"
                 >
 
                 <div id="camposExtras">
@@ -110,39 +111,33 @@
                         type="number"
                         id="comisiones"
                         placeholder="Comisiones (COP)"
+                        min="0"
+                        max="50000000"
+                        step="1"
                     >
 
                     <input
                         type="number"
                         id="horasExtra"
                         placeholder="Total horas extra (COP)"
+                        min="0"
+                        max="10000000"
+                        step="1"
                     >
 
-                    <select id="riesgo">
+                    <select id="riesgo" required>
 
-                        <option value="0">
-                            Nivel de Riesgo (ARL)
-                        </option>
+                        <option value="">Nivel de Riesgo (ARL)</option>
 
-                        <option value="0.00522">
-                            Riesgo 1
-                        </option>
+                        <option value="0.00522">Riesgo 1</option>
 
-                        <option value="0.01044">
-                            Riesgo 2
-                        </option>
+                        <option value="0.01044">Riesgo 2</option>
 
-                        <option value="0.02436">
-                            Riesgo 3
-                        </option>
+                        <option value="0.02436">Riesgo 3</option>
 
-                        <option value="0.04350">
-                            Riesgo 4
-                        </option>
+                        <option value="0.04350">Riesgo 4</option>
 
-                        <option value="0.06960">
-                            Riesgo 5
-                        </option>
+                        <option value="0.06960">Riesgo 5</option>
 
                     </select>
 
@@ -150,7 +145,10 @@
 
             </div>
 
-            <input type="submit" value="Calcular Nómina">
+            <input
+                type="submit"
+                value="Calcular Nómina"
+            >
 
         </form>
 
@@ -186,15 +184,9 @@
 
                             <div class="circulo-centro">
 
-                                <span>
-                                    Ingreso neto
-                                </span>
+                                <span>Ingreso neto</span>
 
-                                <strong id="totalCirculo">
-
-                                    $0
-
-                                </strong>
+                                <strong id="totalCirculo">$0</strong>
 
                             </div>
 
@@ -204,30 +196,15 @@
                         <!-- leyenda -->
                         <div class="leyenda">
 
-                            <p>
-                                <span class="rojo"></span>
-                                Salud
-                            </p>
+                            <p><span class="rojo"></span>Salud</p>
 
-                            <p>
-                                <span class="naranja"></span>
-                                Pensión
-                            </p>
+                            <p><span class="naranja"></span>Pensión</p>
 
-                            <p>
-                                <span class="verde"></span>
-                                ARL
-                            </p>
+                            <p><span class="verde"></span>ARL</p>
 
-                            <p>
-                                <span class="morado"></span>
-                                Retención
-                            </p>
+                            <p><span class="morado"></span>Retención</p>
 
-                            <p>
-                                <span class="azul"></span>
-                                Neto
-                            </p>
+                            <p><span class="azul"></span>Neto</p>
 
                         </div>
 

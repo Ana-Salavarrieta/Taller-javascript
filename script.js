@@ -35,12 +35,16 @@ const pension = 0.04;
 const fondodesolidaridadPensonal = 0.01;
 
 
-// evento
+//evento//
 console.log("AQUI");
 
 
 //funcion validar usuario//
 function validarUsuario() {
+
+      const inputEdad =
+     document.getElementById("edad");
+     inputEdad.setCustomValidity("");
 
     if (edad < 18) {
 
@@ -67,33 +71,39 @@ function validarUsuario() {
         return true;
 
     }
-
 }
 
+     document.getElementById("edad").addEventListener("input", function() {
 
+      this.setCustomValidity("");
+
+ });
 
 //primer formulario//
-formsdatosGenerales.addEventListener("submit", function(event) {
+ formsdatosGenerales.addEventListener("submit", function(event) {
+     if (!formsdatosGenerales.checkValidity()) {
+      return;
+ }
 
     //evita recargar//
     event.preventDefault();
 
 
-    //Capturar datos//
+    //capturar datos//
     nombreCompleto =
-    document.getElementById("nombre").value;
+    document.getElementById("nombre").value.trim();
 
     edad =
-    Number(document.getElementById("edad").value);
+    document.getElementById("edad").value.trim();
 
     tipoDocumento =
     document.getElementById("tipoDocumento").value;
 
     numeroDocumento =
-    document.getElementById("numeroDocumento").value;
+    document.getElementById("numeroDocumento").value.trim();
 
 
-    //Validacion//
+    //validacion campos vacios//
     if (
 
         nombreCompleto === "" ||
@@ -107,6 +117,105 @@ formsdatosGenerales.addEventListener("submit", function(event) {
     ) {
 
         alert("Por favor complete todos los campos");
+
+        return;
+
+    }
+
+
+    //validar nombre//
+    const validarNombre =
+
+    /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$/;
+
+
+    if (!validarNombre.test(nombreCompleto)) {
+
+        alert("El nombre no permite emojis ni caracteres especiales");
+
+        return;
+
+    }
+
+
+    //nombre corto//
+    if (nombreCompleto.length < 2) {
+
+        alert("El nombre es demasiado corto");
+
+        return;
+
+    }
+
+
+    //nombre largo//
+    if (nombreCompleto.length > 100) {
+
+        alert("El nombre no puede superar 100 caracteres");
+
+        return;
+
+    }
+
+
+    //edad solo numeros enteros//
+    if (!/^[0-9]+$/.test(edad)) {
+
+        alert("La edad debe contener solo números enteros");
+
+        return;
+
+    }
+
+
+    //convertir edad a numero//
+    edad = Number(edad);
+
+
+    //edad negativa//
+    if (edad < 0) {
+
+        alert("La edad no puede ser negativa");
+
+        return;
+
+    }
+
+
+    //edad maxima//
+    if (edad > 100) {
+
+        alert("La edad no puede superar 100 años");
+
+        return;
+
+    }
+
+
+    //documento solo numeros//
+    if (!/^[0-9]+$/.test(numeroDocumento)) {
+
+        alert("El documento solo permite números");
+
+        return;
+
+    }
+
+
+    //documento minimo//
+    if (numeroDocumento.length < 3) {
+
+        alert("El documento debe tener mínimo 3 dígitos");
+
+        return;
+
+    }
+
+
+    //documento maximo//
+    if (numeroDocumento.length > 18) {
+
+        alert("El documento no puede superar 18 dígitos");
 
         return;
 
@@ -139,7 +248,7 @@ formularioSalario.addEventListener("submit", function(event) {
     event.preventDefault();
 
 
-    //Capturar datos//
+    //capturar datos//
     salario =
     Number(document.getElementById("salario").value);
 
@@ -153,8 +262,77 @@ formularioSalario.addEventListener("submit", function(event) {
     Number(document.getElementById("riesgo").value);
 
 
-    //punto4//
+    //salario obligatorio//
+    if (isNaN(salario)) {
 
+        alert("El salario debe estar en números");
+
+        return;
+
+    }
+
+
+    //salario negativo//
+    if (salario <= 0) {
+
+        alert("El salario debe ser positivo");
+
+        return;
+
+    }
+
+
+    //salario minimo//
+    if (salario < 1750905) {
+
+        alert("El salario mínimo permitido es 1.750.905");
+
+        return;
+
+    }
+
+
+    //salario maximo//
+    if (salario > 60000000) {
+
+        alert("El salario no puede superar 60.000.000");
+
+        return;
+
+    }
+
+
+    //comisiones negativas//
+    if (comisiones < 0) {
+
+        alert("Las comisiones deben ser positivas");
+
+        return;
+
+    }
+
+
+    //horas extra negativas//
+    if (totalhorasExtra < 0) {
+
+        alert("Las horas extra no pueden ser negativas");
+
+        return;
+
+    }
+
+
+    //riesgo obligatorio//
+    if (isNaN(niveldeRiesgo) || niveldeRiesgo === 0) {
+
+        alert("Seleccione un nivel de riesgo");
+
+        return;
+
+    }
+
+
+    //punto4//
     let salarioTotal =
 
     salario +
@@ -204,9 +382,7 @@ formularioSalario.addEventListener("submit", function(event) {
     }
 
 
-
     //retencion//
-
     let ingresoGravado =
 
     calculoIbc -
@@ -270,17 +446,13 @@ formularioSalario.addEventListener("submit", function(event) {
     retencionUVT * uvT;
 
 
-
-    //aporcentaje de riesgo//
-
+    //porcentaje de riesgo//
     let arl =
 
     calculoIbc * niveldeRiesgo;
 
 
-
-    //Total//
-
+    //total//
     let deducciones =
 
     valorSalud +
@@ -303,9 +475,7 @@ formularioSalario.addEventListener("submit", function(event) {
     deducciones;
 
 
-
     //porcentajes//
-
     let totalGrafica =
 
     valorSalud +
@@ -339,14 +509,7 @@ formularioSalario.addEventListener("submit", function(event) {
     (retencion / totalGrafica) * 100;
 
 
-    let pTotal =
-
-    (total / totalGrafica) * 100;
-
-
-
     //crear grafica//
-
     document.querySelector(".circulo").style.background = `
 
     conic-gradient(
@@ -364,7 +527,6 @@ formularioSalario.addEventListener("submit", function(event) {
     )
 
     `;
-
 
 
     //ocultar formulario salario//
