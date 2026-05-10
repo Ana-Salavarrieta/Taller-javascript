@@ -39,51 +39,82 @@ const fondodesolidaridadPensonal = 0.01;
 console.log("AQUI");
 
 
+//error//
+const errorDiv =
+document.getElementById("error-message");
+
+function mostrarError(mensaje) {
+
+    errorDiv.textContent = mensaje;
+
+    errorDiv.style.display = "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+    setTimeout(() => {
+
+        errorDiv.style.display = "none";
+
+    }, 4000);
+
+}
+
+
 //funcion validar usuario//
 function validarUsuario() {
 
-      const inputEdad =
-     document.getElementById("edad");
-     inputEdad.setCustomValidity("");
+    const inputEdad =
+    document.getElementById("edad");
+
+    inputEdad.setCustomValidity("");
 
     if (edad < 18) {
 
-        alert("No se calcula porque es menor de edad");
+        mostrarError("No se calcula porque es menor de edad");
 
         return false;
 
     } else if (edad >= 18 && edad <= 25) {
 
-        alert("No se calcula porque es beneficiario");
+        mostrarError("No se calcula porque es beneficiario");
 
         return false;
 
     } else if (edad > 25 && edad <= 60) {
 
-        alert("Se calculan las cotizaciones");
+        mostrarError("Se calculan las cotizaciones");
 
         return true;
 
     } else if (edad > 60) {
 
-        alert("Se calcula pensión por ser mayor de 60 años");
+        mostrarError("Se calcula pensión por ser mayor de 60 años");
 
         return true;
 
     }
+
 }
 
-     document.getElementById("edad").addEventListener("input", function() {
 
-      this.setCustomValidity("");
+document.getElementById("edad").addEventListener("input", function() {
 
- });
+    this.setCustomValidity("");
+
+});
+
 
 //primer formulario//
- formsdatosGenerales.addEventListener("submit", function(event) {
-     if (!formsdatosGenerales.checkValidity()) {
-      return;
- }
+formsdatosGenerales.addEventListener("submit", function(event) {
+
+    if (!formsdatosGenerales.checkValidity()) {
+
+        return;
+
+    }
 
     //evita recargar//
     event.preventDefault();
@@ -116,7 +147,7 @@ function validarUsuario() {
 
     ) {
 
-        alert("Por favor complete todos los campos");
+        mostrarError("Por favor complete todos los campos");
 
         return;
 
@@ -131,7 +162,7 @@ function validarUsuario() {
 
     if (!validarNombre.test(nombreCompleto)) {
 
-        alert("El nombre no permite emojis ni caracteres especiales");
+        mostrarError("El nombre no permite emojis ni caracteres especiales");
 
         return;
 
@@ -141,7 +172,7 @@ function validarUsuario() {
     //nombre corto//
     if (nombreCompleto.length < 2) {
 
-        alert("El nombre es demasiado corto");
+        mostrarError("El nombre es demasiado corto");
 
         return;
 
@@ -151,7 +182,7 @@ function validarUsuario() {
     //nombre largo//
     if (nombreCompleto.length > 100) {
 
-        alert("El nombre no puede superar 100 caracteres");
+        mostrarError("El nombre no puede superar 100 caracteres");
 
         return;
 
@@ -161,7 +192,7 @@ function validarUsuario() {
     //edad solo numeros enteros//
     if (!/^[0-9]+$/.test(edad)) {
 
-        alert("La edad debe contener solo números enteros");
+        mostrarError("La edad debe contener solo números enteros");
 
         return;
 
@@ -175,7 +206,7 @@ function validarUsuario() {
     //edad negativa//
     if (edad < 0) {
 
-        alert("La edad no puede ser negativa");
+        mostrarError("La edad no puede ser negativa");
 
         return;
 
@@ -185,7 +216,7 @@ function validarUsuario() {
     //edad maxima//
     if (edad > 100) {
 
-        alert("La edad no puede superar 100 años");
+        mostrarError("La edad no puede superar 100 años");
 
         return;
 
@@ -195,7 +226,7 @@ function validarUsuario() {
     //documento solo numeros//
     if (!/^[0-9]+$/.test(numeroDocumento)) {
 
-        alert("El documento solo permite números");
+        mostrarError("El documento solo permite números");
 
         return;
 
@@ -205,7 +236,7 @@ function validarUsuario() {
     //documento minimo//
     if (numeroDocumento.length < 3) {
 
-        alert("El documento debe tener mínimo 3 dígitos");
+        mostrarError("El documento debe tener mínimo 3 dígitos");
 
         return;
 
@@ -215,7 +246,7 @@ function validarUsuario() {
     //documento maximo//
     if (numeroDocumento.length > 18) {
 
-        alert("El documento no puede superar 18 dígitos");
+        mostrarError("El documento no puede superar 18 dígitos");
 
         return;
 
@@ -238,7 +269,6 @@ function validarUsuario() {
     formularioSalario.classList.remove("oculto");
 
 });
-
 
 
 //segundo formulario//
@@ -265,7 +295,7 @@ formularioSalario.addEventListener("submit", function(event) {
     //salario obligatorio//
     if (isNaN(salario)) {
 
-        alert("El salario debe estar en números");
+        mostrarError("El salario debe estar en números");
 
         return;
 
@@ -275,7 +305,7 @@ formularioSalario.addEventListener("submit", function(event) {
     //salario negativo//
     if (salario <= 0) {
 
-        alert("El salario debe ser positivo");
+        mostrarError("El salario debe ser positivo");
 
         return;
 
@@ -285,7 +315,7 @@ formularioSalario.addEventListener("submit", function(event) {
     //salario minimo//
     if (salario < 1750905) {
 
-        alert("El salario mínimo permitido es 1.750.905");
+        mostrarError("El salario mínimo permitido es 1.750.905");
 
         return;
 
@@ -295,7 +325,7 @@ formularioSalario.addEventListener("submit", function(event) {
     //salario maximo//
     if (salario > 60000000) {
 
-        alert("El salario no puede superar 60.000.000");
+        mostrarError("El salario no puede superar 60.000.000");
 
         return;
 
@@ -305,7 +335,7 @@ formularioSalario.addEventListener("submit", function(event) {
     //comisiones negativas//
     if (comisiones < 0) {
 
-        alert("Las comisiones deben ser positivas");
+        mostrarError("Las comisiones deben ser positivas");
 
         return;
 
@@ -315,7 +345,7 @@ formularioSalario.addEventListener("submit", function(event) {
     //horas extra negativas//
     if (totalhorasExtra < 0) {
 
-        alert("Las horas extra no pueden ser negativas");
+        mostrarError("Las horas extra no pueden ser negativas");
 
         return;
 
@@ -325,7 +355,7 @@ formularioSalario.addEventListener("submit", function(event) {
     //riesgo obligatorio//
     if (isNaN(niveldeRiesgo) || niveldeRiesgo === 0) {
 
-        alert("Seleccione un nivel de riesgo");
+        mostrarError("Seleccione un nivel de riesgo");
 
         return;
 
@@ -548,43 +578,31 @@ formularioSalario.addEventListener("submit", function(event) {
     //imprimir resultados//
     document.getElementById("contenidoResultados").innerHTML = `
 
-    <p><strong>Empleado:</strong>
-    ${nombreCompleto}</p>
+    <p><strong>Empleado:</strong> ${nombreCompleto}</p>
 
-    <p><strong>Edad:</strong>
-    ${edad}</p>
+    <p><strong>Edad:</strong> ${edad}</p>
 
-    <p><strong>Documento:</strong>
-    ${tipoDocumento} ${numeroDocumento}</p>
+    <p><strong>Documento:</strong> ${tipoDocumento} ${numeroDocumento}</p>
 
     <hr>
 
-    <p><strong>Salario:</strong>
-    $${salario.toLocaleString()}</p>
+    <p><strong>Salario:</strong> $${salario.toLocaleString()}</p>
 
-    <p><strong>Comisiones:</strong>
-    $${comisiones.toLocaleString()}</p>
+    <p><strong>Comisiones:</strong> $${comisiones.toLocaleString()}</p>
 
-    <p><strong>Horas Extra:</strong>
-    $${totalhorasExtra.toLocaleString()}</p>
+    <p><strong>Horas Extra:</strong> $${totalhorasExtra.toLocaleString()}</p>
 
-    <p><strong>IBC:</strong>
-    $${calculoIbc.toLocaleString()}</p>
+    <p><strong>IBC:</strong> $${calculoIbc.toLocaleString()}</p>
 
-    <p><strong>Salud:</strong>
-    $${valorSalud.toLocaleString()}</p>
+    <p><strong>Salud:</strong> $${valorSalud.toLocaleString()}</p>
 
-    <p><strong>Pensión:</strong>
-    $${valorPension.toLocaleString()}</p>
+    <p><strong>Pensión:</strong> $${valorPension.toLocaleString()}</p>
 
-    <p><strong>ARL:</strong>
-    $${arl.toLocaleString()}</p>
+    <p><strong>ARL:</strong> $${arl.toLocaleString()}</p>
 
-    <p><strong>Retención:</strong>
-    $${retencion.toLocaleString()}</p>
+    <p><strong>Retención:</strong> $${retencion.toLocaleString()}</p>
 
-    <p><strong>Total Final:</strong>
-    $${total.toLocaleString()}</p>
+    <p><strong>Total Final:</strong> $${total.toLocaleString()}</p>
 
     `;
 
