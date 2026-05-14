@@ -5,10 +5,7 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Taller-JAVAscript</title>
 
@@ -22,121 +19,76 @@
 
         <h1>Simulador de Nómina Laboral</h1>
 
+        <!-- contenedor errores -->
+        <div id="error-message" class="error-container" style="display: none;"></div>
+
         <h2>Ingrese sus datos</h2>
 
-
-        <!-- formulario datos basicos -->
+        <!-- formulario datos generales -->
         <form id="datosGenerales">
 
             <!-- datos personales -->
-            <input
-                type="text"
-                id="nombre"
-                placeholder="Nombre completo"
-                required
-                minlength="2"
-                maxlength="100"
+            <input type="text" id="nombre" placeholder="Nombre completo" required minlength="2" maxlength="100"
                 pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$"
-                title="Solo se permiten letras, números y espacios"
-            >
+                title="Solo se permiten letras, números y espacios">
 
-            <input
-                type="text"
-                id="edad"
-                placeholder="Edad"
-                required
-                pattern="^(1[89]|[2-9][0-9]|100)$"
-                title="Ingrese una edad válida entre 18 y 100 sin decimales"
-            >
+            <input type="text" id="edad" placeholder="Edad" required>
 
             <select id="tipoDocumento" required>
 
                 <option value="">Tipo de documento</option>
-
                 <option value="CC">Cédula de ciudadanía</option>
-
                 <option value="TI">Tarjeta de identidad</option>
-
                 <option value="CE">Cédula de extranjería</option>
-
                 <option value="PP">Pasaporte</option>
-
                 <option value="RC">Registro civil</option>
 
             </select>
 
-            <input
-                type="text"
-                id="numeroDocumento"
-                placeholder="Número de documento"
-                required
-                minlength="3"
-                maxlength="18"
-                pattern="[0-9]+"
-                title="El documento debe tener entre 3 y 18 números"
-            >
+            <input type="text" id="numeroDocumento" placeholder="Número de documento" required minlength="3"
+                maxlength="20" pattern="[0-9]+"
+                title="El documento debe tener entre 3 y 20 números">
 
-            <input
-                type="submit"
-                value="Continuar"
-            >
+            <input type="submit" value="Continuar">
 
             <hr>
 
         </form>
 
-
         <!-- formulario segundo -->
         <form id="datos-Salariales" class="oculto">
 
-            <h2 id="tituloPaso2">
-                Información Salarial
-            </h2>
+            <h2 id="tituloPaso2">Información Salarial</h2>
 
             <div id="contenedorSalarial">
 
-                <input
-                    type="number"
-                    id="salario"
-                    placeholder="Salario básico (COP)"
-                    required
-                    min="1750905"
-                    max="60000000"
-                    step="1"
-                >
+                <input type="number" id="salario" placeholder="Salario básico (COP)" required
+                    min="100000" max="60000000" step="1">
 
                 <div id="camposExtras">
 
-                    <input
-                        type="number"
-                        id="comisiones"
-                        placeholder="Comisiones (COP)"
-                        min="0"
-                        max="50000000"
-                        step="1"
-                    >
+                    <input type="number" id="comisiones" placeholder="Comisiones (COP)"
+                        min="0" max="50000000" step="1">
 
-                    <input
-                        type="number"
-                        id="horasExtra"
-                        placeholder="Total horas extra (COP)"
-                        min="0"
-                        max="10000000"
-                        step="1"
-                    >
+                    <input type="number" id="horasExtra" placeholder="Total horas extra (COP)"
+                        min="0" max="10000000" step="1">
+
+                    <!-- auxilio transporte -->
+                    <select id="auxilioTransporte" required>
+
+                        <option value="">¿Recibe auxilio de transporte?</option>
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+
+                    </select>
 
                     <select id="riesgo" required>
 
                         <option value="">Nivel de Riesgo (ARL)</option>
-
                         <option value="0.00522">Riesgo 1</option>
-
                         <option value="0.01044">Riesgo 2</option>
-
                         <option value="0.02436">Riesgo 3</option>
-
                         <option value="0.04350">Riesgo 4</option>
-
                         <option value="0.06960">Riesgo 5</option>
 
                     </select>
@@ -145,19 +97,26 @@
 
             </div>
 
-            <input
-                type="submit"
-                value="Calcular Nómina"
-            >
+            <input type="submit" value="Calcular Nómina">
 
         </form>
 
+        <!-- formulario pension -->
+        <form id="formMesada" class="oculto">
+
+            <!-- titulo pension -->
+            <h2>Estimado usuario pensionado ingrese su valor de mesada</h2>
+
+            <input type="number" id="mesada" placeholder="Valor mesada pensional" required>
+
+            <input type="submit" value="Calcular Mesada">
+
+        </form>
 
         <!-- resultados -->
         <div id="resultados" class="oculto">
 
             <div class="resultado-grid">
-
 
                 <!-- izquierda -->
                 <div class="resultado-info">
@@ -167,13 +126,10 @@
                     <div id="contenidoResultados"></div>
 
                     <button onclick="location.reload()">
-
                         Nuevo Cálculo
-
                     </button>
 
                 </div>
-
 
                 <!-- derecha -->
                 <div class="resultado-grafica">
@@ -192,18 +148,13 @@
 
                         </div>
 
-
                         <!-- leyenda -->
                         <div class="leyenda">
 
                             <p><span class="rojo"></span>Salud</p>
-
                             <p><span class="naranja"></span>Pensión</p>
-
                             <p><span class="verde"></span>ARL</p>
-
                             <p><span class="morado"></span>Retención</p>
-
                             <p><span class="azul"></span>Neto</p>
 
                         </div>
@@ -215,9 +166,9 @@
             </div>
 
         </div>
+        <div id="error-message" class="error-container"></div>
 
     </div>
-
 
     <!-- script -->
     <script src="script.js"></script>
