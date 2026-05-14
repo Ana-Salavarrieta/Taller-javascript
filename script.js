@@ -70,32 +70,24 @@ function validarUsuario() {
     document.getElementById("edad").setCustomValidity("");
 
     if (edad < 18) {
-
         mostrarMensaje("No se calcula porque es menor de edad");
-
         return false;
-
     }
 
-    if (edad < 25) {
-
-        mostrarMensaje("Usuario beneficiario por cotizante");
-
+    if (edad >= 18 && edad <= 25) {
+        mostrarMensaje("No se calcula porque es beneficiario");
         return false;
-
     }
 
-    if (edad < 60) {
-
-        mostrarMensaje("Se calculan las cotizaciones");
-
+    if (edad > 25 && edad <= 60) {
+        mostrarMensaje("Se calculan obligaciones");
         return true;
-
     }
 
-    mostrarMensaje("Se calcula pensión por ser mayor de 60 años");
-
-    return true;
+    if (edad > 60) {
+        mostrarMensaje("Es pensionado");
+        return true;
+    }
 
 }
 
