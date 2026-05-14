@@ -205,6 +205,32 @@ input[type="submit"]:hover {
     font-weight: 500;
 }
 
+
+/* contenedor formularios */
+.form-layout{
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* izquierda */
+.form-left{
+    flex: 1;
+}
+
+/* derecha */
+.form-right{
+    width: 350px;
+}
+
+/* imagen */
+.image-form img{
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+
 /* grid resultados */
 .resultado-grid {
 

@@ -475,12 +475,24 @@ formularioSalario.addEventListener("submit", function (event) {
     )`;
 
 
+    //leyenda normal//
+    document.querySelector(".leyenda").innerHTML = `
+
+    <p><span class="rojo"></span>Salud</p>
+    <p><span class="naranja"></span>Pensión</p>
+    <p><span class="verde"></span>ARL</p>
+    <p><span class="morado"></span>Retención</p>
+    <p><span class="azul"></span>Neto</p>
+
+    `;
+
+
     //mostrar resultados//
     formularioSalario.classList.add("oculto");
 
-    document
-    .getElementById("resultados")
-    .classList.remove("oculto");
+    document.getElementById("resultados").classList.remove("oculto");
+
+    document.querySelector(".form-layout").style.display = "none";
 
 
     //total centro grafica//
@@ -566,12 +578,38 @@ formularioMesada.addEventListener("submit", function(event) {
     mesada - descuentoSalud;
 
 
+    //porcentajes pensionado//
+    let pSalud =
+    (descuentoSalud / mesada) * 100;
+
+    let pNeto =
+    (totalMesada / mesada) * 100;
+
+
+    //crear grafica pensionado//
+    document.querySelector(".circulo").style.background = `
+    conic-gradient(
+    #ef4444 0% ${pSalud}%,
+    #2563eb ${pSalud}% 100%
+    )`;
+
+
+    //cambiar leyenda pensionado//
+    document.querySelector(".leyenda").innerHTML = `
+
+    <p><span class="rojo"></span>Salud</p>
+
+    <p><span class="azul"></span>Neto</p>
+
+    `;
+
+
     //mostrar resultados//
     formularioMesada.classList.add("oculto");
 
-    document
-    .getElementById("resultados")
-    .classList.remove("oculto");
+    document.getElementById("resultados").classList.remove("oculto");
+
+    document.querySelector(".form-layout").style.display = "none";
 
 
     //total centro grafica//
